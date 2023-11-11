@@ -1,0 +1,13 @@
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - cmake -G Ninja -D CMAKE_BUILD_TYPE=Release -S . -B build/Release
+    - cmake --build build/Release
+  artifacts:
+    paths:
+      - build/Release/2dxcamhook.*.dll
+  tags:
+    - windows

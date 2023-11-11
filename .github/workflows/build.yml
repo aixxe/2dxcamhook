@@ -1,0 +1,36 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up cache
+      uses: actions/cache@v3
+      with:
+        path: cache
+        key: build
+        restore-keys: build
+
+    - name: Configure project
+      run: cmake -DCPM_SOURCE_CACHE=cache -S . -B build
+
+    - name: Build project
+      run: cmake --build build --config Release --parallel
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-artifacts
+        path: build/Release/2dxcamhook.*.dll
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: build/Release/2dxcamhook.*.dll
