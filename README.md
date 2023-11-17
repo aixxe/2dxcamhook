@@ -9,6 +9,8 @@ Hook library for replacing in-game camera textures with [Spout2](https://github.
 - beatmania IIDX 29 CastHour
 - beatmania IIDX 30 RESIDENT
 
+<sub>※ In-game cameras are not supported in the LDJ-003 version of IIDX 30</sub>
+
 ### Configuration
 
 #### Using OBS Studio
@@ -30,11 +32,11 @@ Hook library for replacing in-game camera textures with [Spout2](https://github.
 #### [Bemanitools](https://github.com/djhackersdev/bemanitools)
 
 ```
-launcher.exe [...] -K 2dxcamhook.dll
+launcher.exe [...] -K 2dxcamhook.dll -p io.disable_cams=true
 ```
 
 #### [spice2x](https://spice2x.github.io)
 
 ```
-spice64.exe [...] -k 2dxcamhook.dll
+spice64.exe [...] -iidxdisablecams -k 2dxcamhook.dll
 ```
