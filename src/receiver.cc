@@ -35,9 +35,14 @@ auto receiver::connect() -> bool
     if (!_spout->GetSenderInfo(_name.c_str(), width, height, handle, format))
         return false;
 
-    if (FAILED(_device->CreateTexture(width, height, 1, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &_texture, &handle)))
+    avs2::log::misc("creating {}x{} texture for sender '{}' using shared handle {:X}",
+        width, height, _name, std::uintptr_t(handle));
+
+    auto const hr = _device->CreateTexture(width, height, 1, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &_texture, &handle);
+
+    if (FAILED(hr))
     {
-        avs2::log::warning("create texture with handle 0x{:X} failed", _name, std::uintptr_t(handle));
+        avs2::log::warning("failed to create texture (hr={}, sender={})", hr, _name);
         return false;
     }
 
