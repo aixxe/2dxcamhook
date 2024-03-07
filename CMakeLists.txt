@@ -5,14 +5,14 @@ include(cmake/CPM.cmake)
 
 CPMAddPackage(
     NAME               safetyhook
-    GIT_TAG            v0.1.3
+    GIT_TAG            v0.3.0
     GITHUB_REPOSITORY  cursey/safetyhook
     OPTIONS            "SAFETYHOOK_FETCH_ZYDIS ON"
 )
 
 CPMAddPackage(
     NAME               spout2
-    GIT_TAG            2.007.012
+    GIT_TAG            2.007.013
     GITHUB_REPOSITORY  leadedge/Spout2
     OPTIONS            "SPOUT_BUILD_CMT OFF" "SPOUT_BUILD_LIBRARY OFF" "SPOUT_BUILD_SPOUTDX ON"
 )
