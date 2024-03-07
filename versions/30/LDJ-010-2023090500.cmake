@@ -1,0 +1,11 @@
+set(DLL_VERSION          2023090500)
+set(DLL_TYPE             010)
+
+set(DLL_CODE_SIZE        0x00976200)
+set(DLL_ENTRYPOINT       0x00844b10)
+set(DLL_IMAGE_SIZE       0x071cf000)
+
+set(OFFSET_HOOK_A        0x0064e7b0)
+set(OFFSET_HOOK_B        0x006b71b0)
+set(OFFSET_TEXTURES      0x07106e98)
+set(OFFSET_D3D_DEVICE    0x000000e0)

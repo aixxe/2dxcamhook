@@ -1,0 +1,6 @@
+#pragma once
+
+#include "offsets.h"
+
+auto static versions = std::vector<offsets_t>
+{@VERSION_ALL_OFFSETS@};

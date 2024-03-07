@@ -1,0 +1,12 @@
+
+    /* LDJ-@DLL_TYPE@-@DLL_VERSION@ */
+    {
+	    .dll_code_size     = @DLL_CODE_SIZE@,
+	    .dll_entrypoint    = @DLL_ENTRYPOINT@,
+	    .dll_image_size    = @DLL_IMAGE_SIZE@,
+
+	    .hook_a            = @OFFSET_HOOK_A@,
+	    .hook_b            = @OFFSET_HOOK_B@,
+	    .textures          = @OFFSET_TEXTURES@,
+	    .device            = @OFFSET_D3D_DEVICE@,
+    },
