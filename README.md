@@ -1,3 +1,10 @@
+> [!TIP]
+> **Most functionality provided by this project has been integrated into [spice2x](https://github.com/spice2x/spice2x.github.io/wiki/IIDX-TDJ-Camera-Hook-and-Play-Recording) with the** `-iidxtdjcamhook` **flag**
+>
+> If you just want to use your cameras in-game, please consider using spice2x instead. Some improvements over 2dxcamhook include persistent camera control for formats and options _(e.g. Exposure, Focus, etc.)_ configurable via the in-game overlay, forwards compatibility with future game versions via pattern scanning, easy one-click horizontal and vertical flipping, and much more.
+>
+> If you are unable to use spice2x, or need to capture from a virtual camera source, or a device with an esoteric non-UVC driver, or need the additional flexibility provided by OBS, you may need to use 2dxcamhook instead
+
 ## 2dxcamhook
 
 Hook library for replacing in-game camera textures with [Spout2](https://github.com/leadedge/Spout2) senders
