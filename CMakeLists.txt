@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(2dxcamhook VERSION 0.3.0.0 LANGUAGES CXX)
+project(2dxcamhook VERSION 0.4.0.0 LANGUAGES CXX)
 
 include(cmake/CPM.cmake)
 
