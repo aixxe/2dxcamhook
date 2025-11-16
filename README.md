@@ -17,6 +17,7 @@ Hook library for replacing in-game camera textures with [Spout2](https://github.
 - beatmania IIDX 30 RESIDENT
 - beatmania IIDX 31 EPOLIS
 - beatmania IIDX 32 Pinky Crush
+- beatmania IIDX 33 Sparkle Shower
 
 <sub>※ In-game cameras are not supported in the LDJ-003 version of IIDX 30</sub>
 
