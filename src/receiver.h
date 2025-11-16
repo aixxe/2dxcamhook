@@ -3,11 +3,17 @@
 #include <d3d9.h>
 #include <SpoutDX/SpoutDX.h>
 
+struct textures
+{
+    LPDIRECT3DTEXTURE9* camera_texture;
+    LPDIRECT3DTEXTURE9* preview_texture;
+};
+
 class receiver
 {
     public:
         receiver() = default;
-        receiver(std::shared_ptr<spoutDX>, LPDIRECT3DDEVICE9EX, std::string, LPDIRECT3DTEXTURE9*);
+        receiver(std::shared_ptr<spoutDX>, LPDIRECT3DDEVICE9EX, std::string, textures&&);
 
         ~receiver();
 
@@ -27,7 +33,9 @@ class receiver
         std::string _name = {};
         LPDIRECT3DDEVICE9EX _device = nullptr;
         LPDIRECT3DTEXTURE9 _texture = nullptr;
-        LPDIRECT3DTEXTURE9* _target = nullptr;
-        LPDIRECT3DTEXTURE9 _original = nullptr;
+        LPDIRECT3DTEXTURE9* _camera_target = nullptr;
+        LPDIRECT3DTEXTURE9 _camera_original = nullptr;
+        LPDIRECT3DTEXTURE9* _preview_target = nullptr;
+        LPDIRECT3DTEXTURE9 _preview_original = nullptr;
         std::shared_ptr<spoutDX> _spout = nullptr;
 };

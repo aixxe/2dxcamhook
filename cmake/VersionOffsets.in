@@ -6,7 +6,8 @@
 	    .dll_image_size    = @DLL_IMAGE_SIZE@,
 
 	    .hook_a            = @OFFSET_HOOK_A@,
-	    .hook_b            = @OFFSET_HOOK_B@,
 	    .textures          = @OFFSET_TEXTURES@,
 	    .device            = @OFFSET_D3D_DEVICE@,
+	    .cam_manager       = @OFFSET_CAM_MANAGER@,
+	    .afp_texture       = @OFFSET_AFP_TEXTURE@,
     },

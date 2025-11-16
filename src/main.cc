@@ -1,6 +1,7 @@
 #include <versions.h>
 #include <safetyhook.hpp>
 #include "receiver.h"
+#include "bm2dx.h"
 
 /* constants */
 auto constexpr name_camera_a = "Camera A";
@@ -18,8 +19,7 @@ auto static bm2dx = PBYTE {};
 auto static offsets = offsets_t {};
 
 /* game hooks */
-auto static hook_a = SafetyHookInline {};
-auto static hook_b = SafetyHookInline {};
+auto static hook = SafetyHookInline {};
 
 /* entrypoint */
 auto DllMain(void*, unsigned long reason, void*)
@@ -53,35 +53,27 @@ auto DllMain(void*, unsigned long reason, void*)
     offsets = *it;
 
     /* install hooks */
-    hook_a = safetyhook::create_inline(bm2dx + offsets.hook_a, +[] (PBYTE a1)
+    hook = safetyhook::create_inline(bm2dx + offsets.hook_a, +[] (PBYTE a1)
     {
+        /* call original function */
+        auto const result = hook.call<void*>(a1);
+
         std::call_once(init, [&]
         {
             /* get pointers to the d3d9ex device & camera textures */
             auto const device = *reinterpret_cast<LPDIRECT3DDEVICE9EX*>(a1 + offsets.device);
             auto const textures = *reinterpret_cast<LPDIRECT3DTEXTURE9**>(bm2dx + offsets.textures);
+            auto const cam_manager = reinterpret_cast<Camera::CCameraManager2*>(bm2dx + offsets.cam_manager);
 
-            recv_a = { spout, device, name_camera_a, textures };
-            recv_b = { spout, device, name_camera_b, textures + 2 };
+            recv_a = { spout, device, name_camera_a, { cam_manager->cameras->a->texture(offsets.afp_texture), textures } };
+            recv_b = { spout, device, name_camera_b, { cam_manager->cameras->b->texture(offsets.afp_texture), textures + 2 } };
         });
 
         /* maintain receiving state */
         recv_a.update();
         recv_b.update();
 
-        /* call original function */
-        return hook_a.call<void*>(a1);
-    });
-
-    hook_b = safetyhook::create_inline(bm2dx + offsets.hook_b, +[] (void* a1, int idx)
-    {
-        /* return the appropriate camera texture */
-        if (idx == 0 && recv_a.active())
-            return recv_a.texture();
-        if (idx == 1 && recv_b.active())
-            return recv_b.texture();
-
-        return hook_b.call<LPDIRECT3DTEXTURE9>(a1, idx);
+        return result;
     });
 
     return TRUE;

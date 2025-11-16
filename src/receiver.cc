@@ -1,13 +1,17 @@
 #include "receiver.h"
 #include "avs2-log.h"
 
-receiver::receiver(std::shared_ptr<spoutDX> spout, LPDIRECT3DDEVICE9EX device, std::string name, LPDIRECT3DTEXTURE9* target):
-    _spout(std::move(spout)), _device(device), _name(std::move(name)), _target(target), _original(*target) {}
+receiver::receiver(std::shared_ptr<spoutDX> spout, LPDIRECT3DDEVICE9EX device, std::string name, textures&& sources):
+    _name(std::move(name)), _device(device), _camera_target(sources.camera_texture), _camera_original(*sources.camera_texture),
+    _preview_target(sources.preview_texture), _preview_original(*sources.preview_texture), _spout(std::move(spout)) {}
 
 receiver::~receiver()
 {
-    if (_target)
-        *_target = _original;
+    if (_preview_target)
+        *_preview_target = _preview_original;
+
+    if (_camera_target)
+        *_camera_target = _camera_original;
 
     if (_texture)
         _texture->Release();
@@ -49,7 +53,8 @@ auto receiver::connect() -> bool
     avs2::log::info("receiving from sender '{}'", _name);
 
     _active = true;
-    *_target = _texture;
+    *_camera_target = _texture;
+    *_preview_target = _texture;
 
     return true;
 }
@@ -65,7 +70,8 @@ auto receiver::update() -> bool
     avs2::log::warning("lost sender '{}'", _name);
 
     _active = false;
-    *_target = _original;
+    *_preview_target = _preview_original;
+    *_camera_target = _camera_original;
 
     _texture->Release();
     _texture = nullptr;
