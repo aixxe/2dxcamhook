@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.26)
-project(2dxcamhook VERSION 0.4.0.0 LANGUAGES CXX)
+project(2dxcamhook VERSION 0.5.0.0 LANGUAGES CXX)
 
 include(cmake/CPM.cmake)
 
 CPMAddPackage(
     NAME               safetyhook
-    GIT_TAG            v0.3.0
+    GIT_TAG            v0.6.9
     GITHUB_REPOSITORY  cursey/safetyhook
     OPTIONS            "SAFETYHOOK_FETCH_ZYDIS ON"
 )
