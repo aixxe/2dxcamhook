@@ -1,0 +1,12 @@
+set(DLL_VERSION          2025091700)
+set(DLL_TYPE             010)
+
+set(DLL_CODE_SIZE        0x00c4ea00)
+set(DLL_ENTRYPOINT       0x00aeecec)
+set(DLL_IMAGE_SIZE       0x0bc0d000)
+
+set(OFFSET_HOOK_A        0x0092dd00)
+set(OFFSET_TEXTURES      0x0bb1b098)
+set(OFFSET_D3D_DEVICE    0x000000e0)
+set(OFFSET_CAM_MANAGER   0x0102b490)
+set(OFFSET_AFP_TEXTURE   0x00000030)
